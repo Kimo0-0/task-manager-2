@@ -52,3 +52,5 @@ A robust Task Management Web Application built with **Laravel 11**, designed to 
 | عرض تاسك محدد | `GET` | `/api/tasks/{id}` | Bearer Token | `200 OK` |
 | تعديل تاسكات | `PUT / PATCH` | `/api/tasks/{id}` | Bearer Token | `200 OK` |
 | حذف تاسك | `DELETE` | `/api/tasks/{id}` | Bearer Token | `200 OK / 204` |
+.
+
