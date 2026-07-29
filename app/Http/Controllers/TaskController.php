@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequest;
-use App\Models\Tag;
 use App\Models\Task;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
@@ -26,17 +25,18 @@ class TaskController extends Controller
     {
         $task = $request->user()->tasks()->create($request->validated());
 
-        if ($request->has('tags')) {
-            $task->tags()->sync($request->tags);
-        }
 
-        return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
+
+        return response()->json([
+            'message' => 'Task retrieved successfully',
+            'task' => $task,
+        ], 200);
     }
 
     public function show(Task $task)
     {
         $this->authorize('view', $task);
-        $task->load(['category', 'tags']);
+        $task->load(['category']);
 
         return response()->json([
             'message' => 'Task retrieved successfully',
@@ -48,11 +48,6 @@ class TaskController extends Controller
     {
         $this->authorize('update', $task);
         $task->update($request->validated());
-
-
-        if ($request->has('tags')) {
-            $task->tags()->sync($request->tags);
-        }
 
         return response()->json([
             'message' => 'Task updated successfully',

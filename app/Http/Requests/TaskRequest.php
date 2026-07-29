@@ -27,9 +27,7 @@ class TaskRequest extends FormRequest
                 Rule::exists('categories', 'id')->where(function ($query) {
                     $query->where('user_id', $this->user()->id);
                 }),
-            ],
-            'tags' => ['nullable', 'array'],
-            'tags.*' => ['exists:tags,id'],
+            ]
         ];
     }
 }
