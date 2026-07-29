@@ -54,7 +54,11 @@ class TaskController extends Controller
             $task->tags()->sync($request->tags);
         }
 
-        return redirect()->route('tasks.index')->with('success', 'Task updated successfully.');
+        return response()->json([
+            'message' => 'Task updated successfully',
+            'task' => $task,
+        ], 200);
+        // return redirect()->route('tasks.index')->with('success', 'Task updated successfully.');
     }
 
     public function destroy(Task $task)
